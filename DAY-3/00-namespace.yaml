@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo
+  labels:
+    owner: himanshu
+    purpose: training
+  annotations:
+    talktotechie.com/notes: "K8s primitives demo on Minikube"

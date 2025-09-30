@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deploy
+  namespace: demo
+  labels:
+    app: hello
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello
+      tier: frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: frontend
+      annotations:
+        demo/version: "v1"
+    spec:
+      containers:
+        - name: web
+          image: nginxdemos/hello:plain-text
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 5

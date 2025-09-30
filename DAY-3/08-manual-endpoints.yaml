@@ -1,0 +1,22 @@
+# Service WITHOUT selector + manual Endpoints
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-web
+  namespace: demo
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: external-web
+  namespace: demo
+subsets:
+  - addresses:
+      # Example.com's well-known IP; replace if needed
+      - ip: 93.184.216.34
+    ports:
+      - port: 80
