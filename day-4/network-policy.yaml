@@ -24,3 +24,5 @@ spec:
     - from:
         - ipBlock:
             cidr: 0.0.0.0/0
+          except:
+            - 10.244.0.34
