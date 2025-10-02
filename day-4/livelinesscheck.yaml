@@ -12,3 +12,6 @@ spec:
           port: 80
         initialDelaySeconds: 5
         periodSeconds: 5
+    - name: sidecar
+      image: busybox
+      command: ["/bin/sh", "-c", "echo Sidecar container running; sleep 3600"]
