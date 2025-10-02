@@ -4,7 +4,7 @@ metadata:
   name: hello-cron
   namespace: demo
 spec:
-  schedule: "*/2 * * * *" # every 2 minutes
+  schedule: "* * * * *" # every minute
   successfulJobsHistoryLimit: 2
   failedJobsHistoryLimit: 1
   jobTemplate:
@@ -15,4 +15,4 @@ spec:
           containers:
             - name: tick
               image: busybox:1.36
-              command: ["sh","-c","date; echo Hello from CronJob"]
+              command: ["sh", "-c", "date; echo Hello from CronJob"]

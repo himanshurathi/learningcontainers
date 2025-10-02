@@ -7,6 +7,7 @@ spec:
   completions: 7
   parallelism: 3
   backoffLimit: 2
+
   template:
     spec:
       restartPolicy: Never
