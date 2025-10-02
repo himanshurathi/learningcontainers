@@ -4,7 +4,8 @@ metadata:
   name: demo-job
   namespace: demo
 spec:
-  completions: 3
+  completions: 7
+  parallelism: 3
   backoffLimit: 2
   template:
     spec:
