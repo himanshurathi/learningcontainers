@@ -10,6 +10,16 @@ spec:
         limits:
           memory: "128Mi"
           cpu: "500m"
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
     - name: m2
       image: rockylinux:9
       command: [/bin/sh, -c, "sleep 3600"]
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
