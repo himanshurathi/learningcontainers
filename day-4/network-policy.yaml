@@ -17,9 +17,9 @@ spec:
   podSelector:
     matchLabels:
       app: xyz
-  policyTypes:
-    - Ingress
-    - Egress
+  # policyTypes:
+  #   - Ingress
+  #   - Egress
   # ingress:
   #   - from:
   #       - ipBlock:
