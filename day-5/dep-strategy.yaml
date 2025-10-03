@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: web
 spec:
-  replicas: 4
+  replicas: 9
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -47,9 +47,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-2
+  name: web
 spec:
-  replicas: 4
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -58,11 +58,11 @@ spec:
     # type: Recreate
   selector:
     matchLabels:
-      app: web-2
+      app: web
   template:
     metadata:
       labels:
-        app: web-2
+        app: web
         version: "v1"
     spec:
       containers:
