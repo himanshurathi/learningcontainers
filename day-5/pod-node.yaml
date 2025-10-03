@@ -5,7 +5,7 @@ metadata:
   labels:
     app: pod-node
 spec:
-  nodeName: minikube
+  nodeName: minikube1
   containers:
     - name: c1
       image: nginx
