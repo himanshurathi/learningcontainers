@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emppod
+  labels:
+    app: emppod
+spec:
+  containers:
+    - name: emp1
+      image: nginx
+      volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: emp-vol
+    - name: emp2
+      image: rockylinux:9
+      command:
+        [
+          /bin/sh,
+          -c,
+          'while true; do X=$[$X+1]; echo "$X" > /usr/share/nginx/html/index.html; sleep 1; done',
+        ]
+      volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: emp-vol
+  volumes:
+    - name: emp-vol
+      emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: empsvc
+spec:
+  type: LoadBalancer
+  selector:
+    app: emppod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
