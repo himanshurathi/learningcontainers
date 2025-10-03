@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-node
+  labels:
+    app: pod-node
+spec:
+  nodeName: minikube
+  containers:
+    - name: c1
+      image: nginx
+      ports:
+        - containerPort: 80
