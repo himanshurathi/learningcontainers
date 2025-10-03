@@ -5,11 +5,11 @@ metadata:
 spec:
   replicas: 4
   strategy:
-    # type: RollingUpdate
-    # rollingUpdate:
-    #   maxUnavailable: 1 # at most 1 pod down during rollout
-    #   maxSurge: 1 # at most 1 extra pod temporarily
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1 # at most 1 pod down during rollout
+      maxSurge: 1 # at most 1 extra pod temporarily
+    # type: Recreate
   selector:
     matchLabels:
       app: web
@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: tutum/apache-php
+          image: httpd
           ports:
             - containerPort: 80
           readinessProbe:
@@ -43,3 +43,36 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-2
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1 # at most 1 pod down during rollout
+      maxSurge: 1 # at most 1 extra pod temporarily
+    # type: Recreate
+  selector:
+    matchLabels:
+      app: web-2
+  template:
+    metadata:
+      labels:
+        app: web-2
+        version: "v1"
+    spec:
+      containers:
+        - name: nginx
+          image: tutum/apache-php
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 2
+            periodSeconds: 3
