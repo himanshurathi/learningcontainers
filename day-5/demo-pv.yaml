@@ -12,3 +12,31 @@ spec:
   hostPath:
     path: /home/docker/demopv
     type: Directory
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-pod
+spec:
+  containers:
+    - name: demo-container
+      image: nginx
+      volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: demo-vol
+  volumes:
+    - name: demo-vol
+      persistentVolumeClaim:
+        claimName: demo-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: demo-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: ""
