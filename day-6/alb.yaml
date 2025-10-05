@@ -1,0 +1,27 @@
+albingress.yaml 
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: albingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  ingressClassName: alb 
+  rules:
+  - http:
+      paths:
+      - path: /green.html
+        pathType: Prefix
+        backend:
+          service:
+            name: greenserv
+            port:
+              number: 80
+      - path: /yellow.html
+        pathType: Prefix
+        backend:
+          service:
+            name: yellowserv
+            port:
+              number: 80
