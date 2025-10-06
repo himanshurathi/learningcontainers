@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tol-pod-1
+  labels:
+    app: tol-app
+spec:
+  tolerations:
+    - key: "env"
+      operator: "Equal"
+      value: "test"
+      effect: "NoSchedule"
+  containers:
+    - name: tol-container
+      image: nginx:latest
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tol-pod-2
+  labels:
+    app: tol-app
+spec:
+  containers:
+    - name: tol-container
+      image: nginx:latest
